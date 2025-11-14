@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="auth-tabs">
+    <a href="/Account/Login">Login</a>
+    <a class="active" href="/Account/Register">Register</a>
+</div>
+
+<div class="form-container">
+    <h4 class="text-center mb-3">Create an Account 📝</h4>
+
+    <form method="post">
+        <input type="text" name="username" class="form-control" placeholder="Username" required />
+        <input type="password" name="password" class="form-control" placeholder="Password" required />
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <p class="text-danger text-center mt-2">@ViewBag.Error</p>
+    }
+</div>

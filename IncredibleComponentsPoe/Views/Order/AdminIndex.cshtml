@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IncredibleComponentsPoe.Models.OrderEntity>
+
+@{
+    ViewData["Title"] = "Admin Orders";
+}
+
+<h2>All Orders</h2>
+<p>Below is the list of orders placed by customers.</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Products</th>
+            <th>Quantity</th>
+            <th>Order Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.RowKey</td>
+                <td>@order.CustomerName</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(order.ProductNames))
+                    {
+                        @order.ProductNames
+                    }
+                    else
+                    {
+                        <span>No Products</span>
+                    }
+                </td>
+                <td>@order.Quantity</td>
+                <td>
+                    <!-- Delete Order Form -->
+                    <form asp-controller="Order" asp-action="Delete" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@order.RowKey" />
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Are you sure you want to delete this order?');">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

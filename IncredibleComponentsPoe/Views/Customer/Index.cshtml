@@ -1,0 +1,24 @@
+﻿@model List<IncredibleComponentsPoe.Models.User>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+          
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Username</td>
+            
+                <td>
+                    <a asp-action="Edit" asp-route-id="@u.Id" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@u.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

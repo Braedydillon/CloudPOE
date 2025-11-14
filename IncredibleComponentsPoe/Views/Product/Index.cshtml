@@ -1,0 +1,116 @@
+﻿@model IEnumerable<IncredibleComponentsPoe.Models.ProductEntity>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        background-attachment: fixed;
+        color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .page-header {
+        text-align: center; /* center content */
+        margin-bottom: 1.5rem;
+    }
+
+        .page-header h1 {
+            color: #ffd700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+
+    .products-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .product-card {
+        background-color: rgba(0,0,0,0.6);
+        border-radius: 10px;
+        padding: 0.8rem;
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+    .product-img {
+        max-width: 150px;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .product-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+
+    .product-info h2 {
+        font-size: 1.1rem;
+        color: #ffd700;
+        margin: 0.3rem 0;
+    }
+
+    .product-info p {
+        font-size: 0.9rem;
+        margin: 0.1rem 0;
+    }
+
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+</style>
+
+<div class="page-header text-center">
+    <h1>Products</h1>
+    <a asp-action="Create" class="btn btn-primary btn-sm" style="margin-top:10px;">Create New Product</a>
+</div>
+
+
+<div class="products-container">
+    @foreach (var product in Model)
+    {
+        <div class="product-card">
+            @if (!string.IsNullOrEmpty(product.ImageUrl))
+            {
+                <img src="@product.ImageUrl" alt="@product.ProductName" class="product-img" />
+            }
+            else
+            {
+                <div class="product-img" style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.1); height:120px;">No Image</div>
+            }
+
+            <div class="product-info">
+                <h2>@product.ProductName</h2>
+                <p>Price: @product.Price</p>
+                <p>Stock: @product.Stock</p>
+            </div>
+
+            <div class="btn-group">
+                <a asp-action="Edit" asp-route-id="@product.RowKey" class="btn btn-sm btn-warning">Edit</a>
+                <a asp-action="Details" asp-route-id="@product.RowKey" class="btn btn-sm btn-info">Details</a>
+                <a asp-action="Delete" asp-route-id="@product.RowKey" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+        </div>
+    }
+</div>

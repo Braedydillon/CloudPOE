@@ -1,0 +1,101 @@
+﻿@model List<IncredibleComponentsPoe.Models.ProductEntity>
+
+@{
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<style>
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .product-card {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+
+    .product-img {
+        max-width: 150px;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .product-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+    .product-name {
+        font-size: 1.1rem;
+        color: #ffd700;
+        margin: 0.3rem 0;
+    }
+
+    .product-description {
+        font-size: 0.9rem;
+        color: #fff;
+        margin-bottom: 0.3rem;
+        min-height: 40px; /* keep cards aligned */
+    }
+
+    .product-price {
+        font-weight: bold;
+        color: #ffd700;
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .btn-sm {
+        font-size: 0.8rem;
+    }
+</style>
+
+<h2>Products</h2>
+<p>Browse and add products to your cart.</p>
+
+<div class="products-grid">
+    @foreach (var p in Model)
+    {
+        <div class="product-card">
+            @if (!string.IsNullOrEmpty(p.ImageUrl))
+            {
+                <img src="@p.ImageUrl" alt="@p.ProductName" class="product-img" />
+            }
+            else
+            {
+                <div class="product-img" style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.1); height:120px;">No Image</div>
+            }
+
+            <div class="product-name">@p.ProductName</div>
+            <div class="product-description">@p.ProductDescription</div>
+            <div class="product-price">@p.Price.ToString("C")</div>
+
+            <div class="btn-group">
+                <a asp-controller="Product" asp-action="Details" asp-route-id="@p.RowKey" class="btn btn-info btn-sm">View</a>
+
+                <form asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@p.RowKey" />
+                    <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>

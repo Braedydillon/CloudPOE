@@ -1,0 +1,97 @@
+﻿@model IncredibleComponentsPoe.Models.OrderEntity
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        overflow-x: hidden;
+        background: linear-gradient(45deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+        background-size: 400% 400%;
+        animation: gradientShift 20s ease infinite;
+    }
+
+  
+
+    {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+    }
+
+    .text-center h1 {
+        margin-bottom: 30px;
+        color: #ffff66;
+        text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+    }
+
+    table {
+        background-color: rgba(0,0,0,0.5);
+        color: #fff;
+        transition: transform 0.2s ease;
+    }
+
+    th {
+        background-color: rgba(0,0,0,0.7) !important;
+    }
+
+    tr:hover {
+        background-color: rgba(255, 255, 102, 0.2);
+    }
+
+    .btn-primary, .btn-warning, .btn-danger, .btn-info {
+        transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-warning:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-danger:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-info:hover {
+            transform: scale(1.05);
+        }
+</style>
+<div class="text-center">
+<h1>Order Details</h1>
+</div>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Customer ID</dt>
+        <dd class="col-sm-10">@Model.CustomerRowKey</dd>
+
+        <dt class="col-sm-2">Product ID</dt>
+        <dd class="col-sm-10">@Model.ProductRowKeys</dd>
+
+        <dt class="col-sm-2">Quantity</dt>
+        <dd class="col-sm-10">@Model.Quantity</dd>
+
+     
+        <dt class="col-sm-2">Order Date</dt>
+        <dd class="col-sm-10">@Model.OrderDate</dd>
+    </dl>
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.RowKey" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</p>

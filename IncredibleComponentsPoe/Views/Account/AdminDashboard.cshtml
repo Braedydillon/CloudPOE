@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center p-5 bg-light rounded-4 shadow-lg">
+    <h2 class="text-danger">Admin Dashboard</h2>
+    <h4>Welcome, @ViewBag.Username!</h4>
+    <p>This view is for admins only.</p>
+    <a href="/Account/Logout" class="btn btn-danger mt-3">Logout</a>
+</div>

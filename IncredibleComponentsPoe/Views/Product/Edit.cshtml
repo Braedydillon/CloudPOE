@@ -1,0 +1,79 @@
+﻿@model IncredibleComponentsPoe.Models.ProductEntity
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+<style>
+    body {
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        background-attachment: fixed;
+        color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .text-center h1 {
+        margin-bottom: 30px;
+        color: #ffd700;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    table {
+        background-color: rgba(0,0,0,0.6);
+        color: #fff;
+    }
+
+    th {
+        background-color: rgba(0,0,0,0.8) !important;
+    }
+
+    .product-img {
+        transition: transform 0.3s ease;
+        max-width: 150px;
+        height: auto;
+        border-radius: 8px;
+    }
+
+        .product-img:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+
+    .btn-primary, .btn-warning, .btn-danger, .btn-info {
+        transition: transform 0.2s ease;
+    }
+
+        .btn-primary:hover, .btn-warning:hover, .btn-danger:hover, .btn-info:hover {
+            transform: scale(1.05);
+        }
+</style>
+
+<div class="text-center">
+<h1>Edit Product</h1>
+</div>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="RowKey" />
+
+    <div class="form-group">
+        <label asp-for="ProductName"></label>
+        <input asp-for="ProductName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ProductDescription"></label>
+        <input asp-for="ProductDescription" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" type="number" step="0.01" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Stock"></label>
+        <input asp-for="Stock" class="form-control" type="number" />
+    </div>
+    <div class="form-group">
+        <label for="imageFile">Product Image</label>
+        <input type="file" name="imageFile" id="imageFile" class="form-control" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
